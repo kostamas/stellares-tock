@@ -1,0 +1,12 @@
+<div class="stock-info-component">
+  <div class="stock-info-top">
+    <div class="stock">Stock: {{stockName}}</div>
+    <div class="price">Price: ${{stock['4. close']}}</div>
+    <div class="volume"> Volume: ${{stock['5. volume']}}</div>
+  </div>
+
+  <div class="stock-info-bottom">
+    <div>Updated {{lastUpdate}} seconds ago</div>
+    <button class="remove-stock-btn" mat-button (click)="onRemove()">Remove</button>
+  </div>
+</div>

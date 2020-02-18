@@ -1,0 +1,23 @@
+@import "../../../mixins";
+
+.stock-info-component {
+  @include dimension(100%, 100%);
+  box-sizing: border-box;
+  padding: 10px 15px;
+  background-color: white;
+  border: 1px solid #b2b6ac;
+  border-radius: 5px;
+
+  .stock-info-top {
+    @include flex(space-between, center);
+    margin-bottom: 25px;
+  }
+
+  .stock-info-bottom {
+    @include flex(space-between, center);
+
+    .remove-stock-btn {
+      background-color: #FF4346;
+    }
+  }
+}

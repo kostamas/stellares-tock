@@ -1,0 +1,112 @@
+@import "../../mixins";
+
+.portfolio-component {
+  @include flex(space-between);
+  background: linear-gradient(to right, rgba(168, 255, 120, 0.1), rgba(120, 255, 214, 0.1));
+  padding: 100px 70px 0 120px;
+  height: 100vh;
+  box-sizing: border-box;
+
+  .my-portfolio {
+    width: 55%;
+
+    .my-portfolio-top {
+      @include flex(space-between);
+      margin-bottom: 30px;
+
+      .title {
+        font-size: 25px;
+        padding-top: 17px;
+      }
+
+      .refresh-rate {
+        @include flex(space-between, center);
+
+        .refresh-rate-text {
+          margin-right: 35px;
+          font-size: 18px;
+        }
+
+        mat-form-field {
+          width: 40px;
+        }
+      }
+    }
+
+    .stock-to-show .stock-info {
+      margin-bottom: 10px;
+    }
+  }
+
+  .stocks-selector {
+    box-sizing: border-box;
+    width: 45%;
+    padding-left: 120px;
+
+    .title {
+      margin-bottom: 25px;
+      padding-top: 17px;
+      font-size: 25px;
+    }
+
+    mat-form-field {
+      max-width: 120px;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .portfolio-component {
+    padding: 50px 30px;
+
+    .my-portfolio-top {
+      margin-bottom: 13px;
+    }
+
+    .my-portfolio {
+      width: 65%;
+    }
+
+    .stocks-selector {
+      width: 35%;
+      padding-left: 40px;
+
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio-component {
+    flex-direction: column-reverse;
+    padding: 30px 30px;
+
+
+    .my-portfolio {
+      width: 100%;
+
+      .my-portfolio-top {
+        .title {
+          font-size: 22px;
+        }
+
+        .refresh-rate .refresh-rate-text {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .stocks-selector {
+      margin: 0 auto 10px auto;
+      padding-left: 0;
+      width: 180px;
+
+      .title {
+        font-size: 22px;
+      }
+
+      mat-form-field {
+        padding-left: 25px;
+      }
+    }
+  }
+}
