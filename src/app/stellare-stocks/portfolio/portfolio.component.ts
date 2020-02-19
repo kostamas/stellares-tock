@@ -3,6 +3,7 @@ import {StokesService} from '../../services/stokes.service';
 import {IStockInfo} from '../../../types/api/stock';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {combineLatest} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-portfolio',
@@ -36,6 +37,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     this.symbolsList = [...this.stokesService.symbolsList];
     this.selectedRate = this.seconds[2];
     this.subscription = combineLatest(this.stokesService.selectedSymbols$, this.stokesService.selectedStocks$)
+      .pipe(take(1))
       .subscribe(([symbols, stocks]) => {
         if (symbols) {
           this.selectedSymbols = symbols;
@@ -45,7 +47,6 @@ export class PortfolioComponent implements OnInit, OnDestroy {
         }
         this.setInterval(this.selectedRate);
       });
-    this.subscription.unsubscribe();
   }
 
   setInterval(selectedRate): void {

@@ -3,6 +3,7 @@ import {IStockInfo} from '../../../types/api/stock';
 import {StokesService} from '../../services/stokes.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {combineLatest} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-general-volume',
@@ -30,6 +31,7 @@ export class GeneralVolumeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = combineLatest(this.stokesService.selectedSymbols$, this.stokesService.selectedStocks$)
+      .pipe(take(1))
       .subscribe(([symbols, selectedStocks]) => {
         if (selectedStocks) {
           this.selectedStocks = selectedStocks;
@@ -41,8 +43,8 @@ export class GeneralVolumeComponent implements OnInit, OnDestroy {
             this.stokesService.getStocks(symbols, (stocks: IStockInfo[]) => {
               if (stocks) {
                 this.selectedStocks = stocks;
-                this.calcGeneralVolume(this.selectedStocks);
                 this.stokesService.selectedStocks$.next(stocks);
+                this.calcGeneralVolume(this.selectedStocks);
               }
             });
           }, 4 * 1000);
