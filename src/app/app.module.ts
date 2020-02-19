@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import {PortfolioModule} from './portfolio/protfolio.module';
+import {StellareStocksModule} from './stellare-stocks/stellare-stocks.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -16,7 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    PortfolioModule,
+    StellareStocksModule,
     BrowserAnimationsModule
   ],
   providers: [],

@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {StokesService} from '../services/stokes.service';
-import {IStockInfo} from '../../types/api/stock';
+import {StokesService} from '../../services/stokes.service';
+import {IStockInfo} from '../../../types/api/stock';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {combineLatest} from 'rxjs';
 
 @Component({
   selector: 'app-portfolio',
@@ -26,6 +27,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   public selectedSymbols: string[] = [];
   public selectedSymbol = '';
   public interval: number;
+  public subscription: any;
 
   constructor(private stokesService: StokesService) {
   }
@@ -33,7 +35,17 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.symbolsList = [...this.stokesService.symbolsList];
     this.selectedRate = this.seconds[2];
-    this.setInterval(this.selectedRate);
+    this.subscription = combineLatest(this.stokesService.selectedSymbols$, this.stokesService.selectedStocks$)
+      .subscribe(([symbols, stocks]) => {
+        if (symbols) {
+          this.selectedSymbols = symbols;
+        }
+        if (stocks) {
+          this.selectedStocks = stocks;
+        }
+        this.setInterval(this.selectedRate);
+      });
+    this.subscription.unsubscribe();
   }
 
   setInterval(selectedRate): void {
@@ -48,6 +60,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     this.stokesService.getStocks(symbols, (stocks: IStockInfo[]) => {
       if (stocks) {
         this.selectedStocks = stocks;
+        this.stokesService.selectedStocks$.next(stocks);
       }
     });
   }
@@ -58,8 +71,10 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       this.stokesService.getStocks([selectedSymbol], (stocks: IStockInfo[]) => {
         if (stocks && stocks.length) {
           this.selectedStocks.push(stocks[0]);
+          this.stokesService.selectedStocks$.next(this.selectedStocks);
         }
       });
+      this.stokesService.selectedSymbols$.next(this.selectedSymbols);
     }
     setTimeout(() => this.selectedSymbol = '');
   }
@@ -67,9 +82,13 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   onItemRemoved(stockToRemove: IStockInfo): void {
     this.selectedSymbols = this.selectedSymbols.filter(symbol => symbol !== stockToRemove.symbol);
     this.selectedStocks = this.selectedStocks.filter(stock => stock.symbol !== stockToRemove.symbol);
+    this.stokesService.selectedSymbols$.next(this.selectedSymbols);
+    this.stokesService.selectedStocks$.next(this.selectedStocks);
+
   }
 
   ngOnDestroy(): void {
     clearInterval(this.interval);
+    this.subscription.unsubscribe();
   }
 }

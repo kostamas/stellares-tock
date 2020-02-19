@@ -1,4 +1,4 @@
-@import "../../mixins";
+@import "../../../mixins";
 
 .portfolio-component {
   @include flex(space-between);
@@ -6,6 +6,12 @@
   padding: 100px 70px 0 120px;
   height: 100vh;
   box-sizing: border-box;
+
+  .general-volume-btn {
+    @include position(absolute, 15px, null, null, 30px);
+    color: #3f51b5;
+    cursor: pointer;
+  }
 
   .my-portfolio {
     width: 55%;
@@ -81,6 +87,10 @@
     flex-direction: column-reverse;
     padding: 30px 20px;
 
+    .general-volume-btn {
+      left: 10px;
+      top: 10px;
+    }
 
     .my-portfolio {
       width: 100%;

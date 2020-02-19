@@ -1,0 +1,12 @@
+<div class="general-volume-component">
+
+  <div mat-button class="portfolio-page" routerLink="/portfolio">Portfolio Page</div>
+
+  <div class="title">General Volume : {{generalVolume}}</div>
+
+  <div class="stock-to-show">
+    <div class="stock-info" [@simpleFadeAnimation]="'in'" *ngFor="let stock of selectedStocks">
+      <app-stock-info [stock]="stock" [hideRemoveButton]="true"></app-stock-info>
+    </div>
+  </div>
+</div>

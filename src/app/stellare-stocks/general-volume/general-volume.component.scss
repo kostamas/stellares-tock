@@ -1,0 +1,37 @@
+@import "../../../mixins";
+
+.general-volume-component {
+  .portfolio-page {
+    @include position(absolute, 15px, null, null, 30px);
+    color: #3f51b5;
+    cursor: pointer;
+  }
+
+  .title {
+    padding-top: 100px;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .stock-to-show {
+    width: 400px;
+    margin: 0 auto;
+
+    .stock-info {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .general-volume-component {
+    .portfolio-page {
+      left: 10px;
+      top: 10px;
+    }
+
+    .stock-to-show {
+      width: 330px;
+    }
+  }
+}

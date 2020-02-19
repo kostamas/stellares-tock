@@ -10,6 +10,9 @@ import {getStocks} from '../../mockDB';
 })
 export class StokesService {
   public stocksData$: BehaviorSubject<IStocksData> = new BehaviorSubject<IStocksData>(null);
+  public selectedSymbols$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(null);
+  public selectedStocks$: BehaviorSubject<IStockInfo[]> = new BehaviorSubject<IStockInfo[]>(null);
+
   public stocksFunctionType = 'TIME_SERIES_INTRADAY';
   public interval = 1;
   public symbolsList = [

@@ -8,6 +8,7 @@ import {IStockInfo} from '../../../types/api/stock';
 })
 export class StockInfoComponent implements OnInit {
   @Input() stock: IStockInfo;
+  @Input() hideRemoveButton;
   @Output() itemRemoved: EventEmitter<IStockInfo> = new EventEmitter<IStockInfo>();
 
   public lastUpdate: number;

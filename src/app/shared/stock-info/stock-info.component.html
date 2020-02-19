@@ -7,6 +7,6 @@
 
   <div class="stock-info-bottom">
     <div >Updated {{lastUpdate}} seconds ago</div>
-    <button class="remove-stock-btn" mat-button (click)="onRemove()">Remove</button>
+    <button *ngIf="!hideRemoveButton" class="remove-stock-btn" mat-button (click)="onRemove()">Remove</button>
   </div>
 </div>
