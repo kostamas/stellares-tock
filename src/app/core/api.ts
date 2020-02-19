@@ -4,6 +4,6 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class ApiService {
-  public API_KEY = 'R0UTKBAMC74O24MF)';
+  public API_KEY = 'MJJOQ69Y676IMJWR';
   public stocks = 'https://www.alphavantage.co/query';
 }

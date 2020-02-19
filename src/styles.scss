@@ -7,4 +7,19 @@ html, body {
 body {
   margin: 0;
   font-family: sans-serif;
+  background: linear-gradient(to right, rgba(168, 255, 120, 0.1), rgba(120, 255, 214, 0.1));
+}
+
+body, .scrollbar-style {
+  &::-webkit-scrollbar {
+    height: 20px;
+    width: 5px;
+    background-color: #7a7a7a;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #7a7a7a;
+    -webkit-border-radius: 1ex;
+  }
 }

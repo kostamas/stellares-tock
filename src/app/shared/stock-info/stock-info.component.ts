@@ -8,26 +8,23 @@ import {IStockInfo} from '../../../types/api/stock';
 })
 export class StockInfoComponent implements OnInit {
   @Input() stock: IStockInfo;
-  @Input() stockName: string;
-  @Input() stockDate: string;
-
   @Output() itemRemoved: EventEmitter<IStockInfo> = new EventEmitter<IStockInfo>();
-  public lastUpdate: string;
+
+  public lastUpdate: number;
 
   constructor() {
   }
 
   ngOnInit() {
-    const x = this.stock;
-    this.lastUpdate = this.calcLastUpdate();
+    this.lastUpdate = this.calcLastUpdate(this.stock);
   }
 
-  calcLastUpdate() {
-    return '';
+  calcLastUpdate(stock: IStockInfo) {
+    const diff = Date.now() - stock.date;
+    return Math.ceil(diff / 1000);
   }
 
   onRemove() {
-    debugger
     this.itemRemoved.emit(this.stock);
   }
 }

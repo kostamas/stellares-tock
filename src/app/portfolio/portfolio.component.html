@@ -7,7 +7,7 @@
       <div class="refresh-rate">
         <div class="refresh-rate-text">Refresh Rate: (seconds)</div>
         <mat-form-field>
-          <mat-select [(ngModel)]="selectedRate">
+          <mat-select [(ngModel)]="selectedRate" (selectionChange)="setInterval($event.value)">
             <mat-option *ngFor="let second of seconds" [value]="second">{{second}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -15,8 +15,8 @@
     </div>
 
     <div class="stock-to-show">
-      <div class="stock-info" *ngFor="let stock of selectedStocks">
-        <app-stock-info [stockName]="" [stock]="stock" (itemRemoved)="onItemRemoved($event)"></app-stock-info>
+      <div class="stock-info"  [@simpleFadeAnimation]="'in'" *ngFor="let stock of selectedStocks">
+        <app-stock-info [stock]="stock" (itemRemoved)="onItemRemoved($event)"></app-stock-info>
       </div>
     </div>
 
@@ -26,8 +26,8 @@
     <div class="title">Stocks Selector</div>
     <mat-form-field>
       <mat-label>Select stock</mat-label>
-      <mat-select (selectionChange)="onSelectSymbol($event.value)">
-        <mat-option *ngFor="let stock of stocksList" [value]="stock">
+      <mat-select [(ngModel)]="selectedSymbol" (selectionChange)="onSelectSymbol($event.value)">
+        <mat-option *ngFor="let stock of symbolsList" [value]="stock">
           {{stock}}
         </mat-option>
       </mat-select>
